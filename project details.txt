@@ -1,0 +1,38 @@
+message model ke body me text rahenga and hamne string ka size 50 characters rakha hai .
+ def __str___(self):
+        return self.body[0:50]
+
+to see added models in admin panel we are suppose to resgister it 
+admin.site.register(Message)
+
+meta in models (room )
+batta hai ki kaise render krna hai ya kiss order me .
+ ordering = ['-updateed','-created']
+
+jaha se user aya waha pe bhejne ke liye (redirect krne ke liye )
+<a  href="{{request.META.HTTP_REFERER}}Go back </a>
+
+home me sidebar me jo topics display kiye usko fir home page me route kiye with query request of that object .
+<a href="{% url 'home'%}?q={{topic.name}}">{{topic.name}}</a>
+
+and fir vo particular query ko excute krne ke liye .
+q = request.GET.get('q') if request.GET.get('q')!=None else ''   (yaha pe check kr rahe query me q valid hai ya nahi )
+    rooms = Room.objects.filter(Topic__name=q) (filter kr ke do mujhe topic "__" ka matlab jaha in sql its WHERE name = q )
+    __icontains will make sure if return objects contains atleast those letters
+
+in loginpage funtion login ka ek alag builtin function hai so alag name se banye apan 
+
+to restrict page we are using decorator and jo jo action ya page se restrict krna hai uska view ke function ke upar @login_required() use krne ka
+
+rest api banne ke liye:
+django api returns queryset(collection of data in db) that returns dictonary of data which is not in json format so json format me krne ke liye we use serializers
+serializers are classes which turn python object into json format
+
+cors issue cross origin resource sharing 
+our django dont know from where the request is being made so it does not response so to we need to configure so that django can either allow all endpoints to make request to our api or we can provide specific set of urls that are allowed to call our api.
+teen type ka configureation hota hai cors ka allow set of origin , regix that allow set of domain , allow all origin 
+
+we made ustom user model jaha pe bio chaiye dp chaiye dp ke liye we need pilloe library to manage imagefield in dictonry
+
+user uploaded image kaha rakhna hai vo hame django ko batana padta hai so setting me jake MEDIA_ROOT=BASE_DIR/'static/images'
+but in production invironment we use aws s3 bucket
