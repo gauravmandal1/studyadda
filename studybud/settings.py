@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-vuwb9mlpld=680z!(i%^t#7lqdg%ypvu_38gz&$v=@4pphvx-j'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['https://study-addaa.herokuapp.com/','127.0.0.1']
 
@@ -46,7 +46,6 @@ AUTH_USER_MODEL='base.user'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -117,21 +116,37 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles')
+
+
+
+STATIC_ROOT= os.path.join(BASE_DIR,'static/images')
 STATIC_URL = 'static/'
-MEDIA_URL='/images/'
+MEDIA_URL='images/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'statics'
+    # BASE_DIR / 'static'
+    os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_ROOT=os.path.join(BASE_DIR / 'statics/images')
+if not DEBUG:
+    MEDIA_ROOT=os.path.join(BASE_DIR, '../images')
+else:
+    MEDIA_ROOT = BASE_DIR/'static/images'
+# STATIC_URL = '/static/'
+# MEDIA_URL = '/images/'
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static'
+# ]
+
+# MEDIA_ROOT = BASE_DIR / 'static/images'
+
+
+# MEDIA_ROOT=os.path.join(BASE_DIR / 'static/images')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

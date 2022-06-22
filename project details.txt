@@ -36,3 +36,6 @@ we made ustom user model jaha pe bio chaiye dp chaiye dp ke liye we need pilloe 
 
 user uploaded image kaha rakhna hai vo hame django ko batana padta hai so setting me jake MEDIA_ROOT=BASE_DIR/'static/images'
 but in production invironment we use aws s3 bucket
+
+Django doest server static file in production environment matalb debug=False pe static load nhi hota
+so we use whitenoice  
